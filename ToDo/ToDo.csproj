@@ -156,13 +156,13 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\listsController.cs" />
-    <Compile Include="Controllers\tasksController.cs" />
+    <Compile Include="Controllers\ListsController.cs" />
+    <Compile Include="Controllers\TasksController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\list.cs" />
-    <Compile Include="Models\task.cs" />
+    <Compile Include="Models\List.cs" />
+    <Compile Include="Models\Task.cs" />
     <Compile Include="Models\ToDoContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -218,16 +218,16 @@
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\tasks\Create.cshtml" />
-    <Content Include="Views\tasks\Delete.cshtml" />
-    <Content Include="Views\tasks\Details.cshtml" />
-    <Content Include="Views\tasks\Edit.cshtml" />
-    <Content Include="Views\tasks\Index.cshtml" />
-    <Content Include="Views\lists\Create.cshtml" />
-    <Content Include="Views\lists\Delete.cshtml" />
-    <Content Include="Views\lists\Details.cshtml" />
-    <Content Include="Views\lists\Edit.cshtml" />
-    <Content Include="Views\lists\Index.cshtml" />
+    <Content Include="Views\Lists\Create.cshtml" />
+    <Content Include="Views\Lists\Delete.cshtml" />
+    <Content Include="Views\Lists\Details.cshtml" />
+    <Content Include="Views\Lists\Edit.cshtml" />
+    <Content Include="Views\Lists\Index.cshtml" />
+    <Content Include="Views\Tasks\Create.cshtml" />
+    <Content Include="Views\Tasks\Delete.cshtml" />
+    <Content Include="Views\Tasks\Details.cshtml" />
+    <Content Include="Views\Tasks\Edit.cshtml" />
+    <Content Include="Views\Tasks\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

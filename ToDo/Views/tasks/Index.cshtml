@@ -1,4 +1,4 @@
-﻿@model IEnumerable<ToDo.Models.task>
+﻿@model IEnumerable<ToDo.Models.Task>
 
 @{
     ViewBag.Title = "Index";
@@ -11,6 +11,9 @@
 </p>
 <table class="table">
     <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.List.Title)
+        </th>
         <th>
             @Html.DisplayNameFor(model => model.TaskName)
         </th>
@@ -28,15 +31,31 @@
 
 @foreach (var item in Model) {
     <tr>
+        @*<td>
+            @Html.DisplayFor(modelItem => item.IsDone)
+        </td>*@
+        <td>
+            <a href="@Url.Action("ToggleDone", new { id=item.TaskID })">
+                @if (item.IsDone)
+                {
+                    <span class="glyphicon glyphicon-check"></span>
+                }
+                else
+                {
+                    <span class="glyphicon glyphicon-unchecked"></span>
+                }
+            </a>
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.List.Title)
+        </td>
         <td>
             @Html.DisplayFor(modelItem => item.TaskName)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Description)
         </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.IsDone)
-        </td>
+       
         <td>
             @Html.DisplayFor(modelItem => item.Date)
         </td>

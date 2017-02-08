@@ -6,14 +6,14 @@ using System.Web;
 
 namespace ToDo.Models
 {
-    public class list
+    public class List
     {   [Key]
 
         public int ListID { get; set; }
         public string Title { get; set; }
         public DateTime Date { get; set; }
 
-        public virtual ICollection<task> Tasks { get; set; }
+        public virtual ICollection<Task> Tasks { get; set; }
         
     }
 }

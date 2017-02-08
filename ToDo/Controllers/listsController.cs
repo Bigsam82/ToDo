@@ -10,24 +10,24 @@ using ToDo.Models;
 
 namespace ToDo.Controllers
 {
-    public class listsController : Controller
+    public class ListsController : Controller
     {
         private ToDoContext db = new ToDoContext();
 
-        // GET: lists
+        // GET: Lists
         public ActionResult Index()
         {
             return View(db.lists.ToList());
         }
 
-        // GET: lists/Details/5
+        // GET: Lists/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            list list = db.lists.Find(id);
+            List list = db.lists.Find(id);
             if (list == null)
             {
                 return HttpNotFound();
@@ -35,18 +35,18 @@ namespace ToDo.Controllers
             return View(list);
         }
 
-        // GET: lists/Create
+        // GET: Lists/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: lists/Create
+        // POST: Lists/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ListID,Title,Date")] list list)
+        public ActionResult Create([Bind(Include = "ListID,Title,Date")] List list)
         {
             if (ModelState.IsValid)
             {
@@ -58,14 +58,14 @@ namespace ToDo.Controllers
             return View(list);
         }
 
-        // GET: lists/Edit/5
+        // GET: Lists/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            list list = db.lists.Find(id);
+            List list = db.lists.Find(id);
             if (list == null)
             {
                 return HttpNotFound();
@@ -73,12 +73,12 @@ namespace ToDo.Controllers
             return View(list);
         }
 
-        // POST: lists/Edit/5
+        // POST: Lists/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ListID,Title,Date")] list list)
+        public ActionResult Edit([Bind(Include = "ListID,Title,Date")] List list)
         {
             if (ModelState.IsValid)
             {
@@ -89,14 +89,14 @@ namespace ToDo.Controllers
             return View(list);
         }
 
-        // GET: lists/Delete/5
+        // GET: Lists/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            list list = db.lists.Find(id);
+            List list = db.lists.Find(id);
             if (list == null)
             {
                 return HttpNotFound();
@@ -104,12 +104,12 @@ namespace ToDo.Controllers
             return View(list);
         }
 
-        // POST: lists/Delete/5
+        // POST: Lists/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            list list = db.lists.Find(id);
+            List list = db.lists.Find(id);
             db.lists.Remove(list);
             db.SaveChanges();
             return RedirectToAction("Index");

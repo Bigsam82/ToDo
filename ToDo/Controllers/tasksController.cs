@@ -10,43 +10,68 @@ using ToDo.Models;
 
 namespace ToDo.Controllers
 {
-    public class tasksController : Controller
+    public class TasksController : Controller
     {
         private ToDoContext db = new ToDoContext();
 
-        // GET: tasks
+        // GET: Tasks
         public ActionResult Index()
         {
-            return View(db.tasks.ToList());
+            var tasks = db.tasks.Include(t => t.List);
+            return View(tasks.ToList());
         }
 
-        // GET: tasks/Details/5
+        // GET: Tasks/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            task task = db.tasks.Find(id);
+            Task task = db.tasks.Find(id);
             if (task == null)
             {
                 return HttpNotFound();
             }
             return View(task);
         }
+        public ActionResult ToggleDone(int?id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Task task = db.tasks.Find(id);
+            if (task == null)
+            {
+                return HttpNotFound();
+            }
+            if (task.IsDone)
+            {
+                task.IsDone = false;
+            }
+            else
+            {
+                task.IsDone = true;
+            }
+            db.SaveChanges();
+            return RedirectToAction("index");
+        }
 
-        // GET: tasks/Create
+
+        // GET: Tasks/Create
         public ActionResult Create()
         {
+            ViewBag.ListID = new SelectList(db.lists, "ListID", "Title");
             return View();
         }
 
-        // POST: tasks/Create
+        // POST: Tasks/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "TaskID,TaskName,Description,IsDone,Date")] task task)
+        public ActionResult Create([Bind(Include = "TaskID,TaskName,Description,IsDone,Date,ListID")] Task task)
         {
             if (ModelState.IsValid)
             {
@@ -55,30 +80,32 @@ namespace ToDo.Controllers
                 return RedirectToAction("Index");
             }
 
+            ViewBag.ListID = new SelectList(db.lists, "ListID", "Title", task.ListID);
             return View(task);
         }
 
-        // GET: tasks/Edit/5
+        // GET: Tasks/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            task task = db.tasks.Find(id);
+            Task task = db.tasks.Find(id);
             if (task == null)
             {
                 return HttpNotFound();
             }
+            ViewBag.ListID = new SelectList(db.lists, "ListID", "Title", task.ListID);
             return View(task);
         }
 
-        // POST: tasks/Edit/5
+        // POST: Tasks/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "TaskID,TaskName,Description,IsDone,Date")] task task)
+        public ActionResult Edit([Bind(Include = "TaskID,TaskName,Description,IsDone,Date,ListID")] Task task)
         {
             if (ModelState.IsValid)
             {
@@ -86,17 +113,18 @@ namespace ToDo.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
+            ViewBag.ListID = new SelectList(db.lists, "ListID", "Title", task.ListID);
             return View(task);
         }
 
-        // GET: tasks/Delete/5
+        // GET: Tasks/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            task task = db.tasks.Find(id);
+            Task task = db.tasks.Find(id);
             if (task == null)
             {
                 return HttpNotFound();
@@ -104,12 +132,12 @@ namespace ToDo.Controllers
             return View(task);
         }
 
-        // POST: tasks/Delete/5
+        // POST: Tasks/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            task task = db.tasks.Find(id);
+            Task task = db.tasks.Find(id);
             db.tasks.Remove(task);
             db.SaveChanges();
             return RedirectToAction("Index");

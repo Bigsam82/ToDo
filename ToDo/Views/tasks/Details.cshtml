@@ -1,4 +1,4 @@
-﻿@model ToDo.Models.task
+﻿@model ToDo.Models.Task
 
 @{
     ViewBag.Title = "Details";
@@ -7,9 +7,17 @@
 <h2>Details</h2>
 
 <div>
-    <h4>task</h4>
+    <h4>Task</h4>
     <hr />
     <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.List.Title)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.List.Title)
+        </dd>
+
         <dt>
             @Html.DisplayNameFor(model => model.TaskName)
         </dt>

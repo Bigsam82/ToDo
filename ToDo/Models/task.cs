@@ -4,10 +4,11 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
+using ToDo.Models;
 
 namespace ToDo.Models
 {
-    public class task
+    public class Task
     {
         [Key]
         public int TaskID { get; set; }
@@ -18,7 +19,7 @@ namespace ToDo.Models
 
         [ForeignKey("List")]
         public int ListID { get; set; }
-        public virtual list List { get; set; }
+        public virtual List List { get; set; }
 
 
     }

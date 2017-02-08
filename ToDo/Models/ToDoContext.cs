@@ -19,8 +19,8 @@ namespace ToDo.Models
         {
         }
 
-        public System.Data.Entity.DbSet<ToDo.Models.task> tasks { get; set; }
+        public System.Data.Entity.DbSet<ToDo.Models.Task> tasks { get; set; }
 
-        public System.Data.Entity.DbSet<ToDo.Models.list> lists { get; set; }
+        public System.Data.Entity.DbSet<ToDo.Models.List> lists { get; set; }
     }
 }
